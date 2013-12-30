@@ -68,8 +68,8 @@ package "OTRS-Package" do
   source "/usr/local/src/otrs-3.3.3-01.noarch.rpm"
 end
 
-service "otrs" do
-      supports :status => true, :restart => true, :reload => true
-      action [ :enable, :restart ]
-end
+#service "otrs" do
+#      supports :status => true, :restart => true, :reload => true
+#      action [ :enable, :restart ]
+#end
 

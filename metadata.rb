@@ -10,4 +10,5 @@ depends "selinux",     "~> 0.5.6"
 depends "yum",         "~> 2.3.0"
 depends "timezone-ii", "~> 0.2.0"
 depends "database",    "~> 1.3.0"
+depends "iptables"
 
