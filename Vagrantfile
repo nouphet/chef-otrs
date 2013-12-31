@@ -89,6 +89,7 @@ Vagrant.configure("2") do |config|
 
     chef.run_list = [
         "recipe[selinux::disabled]",
+        "recipe[iptables::disabled]",
         "recipe[yum::epel]",                                                    
         "recipe[database::mysql]",
         "recipe[chef-otrs::default]"

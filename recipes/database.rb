@@ -11,12 +11,10 @@ end
 
 mysql_database_user "otrs" do
     connection mysql_connection_info
-    password "otrs"
+    #password "otrs"
+    password "somepass"
     database_name "otrs"
     privileges [:all]
     action [:create, :grant]
 end
-
-
-
 

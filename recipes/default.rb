@@ -14,6 +14,10 @@ include_recipe 'timezone-ii'
 include_recipe 'yum::epel'
 include_recipe "yum"                                                            
 include_recipe 'database::mysql'
+#include_recipe "iptables"                                                            
+
+#iptables_rule "ssh"
+#iptables_rule "http"
 
 %w{vim tcpdump wget gcc-c++ libffi-devel libyaml-devel make git}.each do |pkg|
   package pkg do                                                                
@@ -21,7 +25,35 @@ include_recipe 'database::mysql'
   end                                                                           
 end                                                                             
 
-%w{perl-DBD-MySQL mysql-server perl perl-core perl-libwww-perl perl-Crypt-SSLeay perl-LDAP perl-Net-DNS perl-IO-Socket-SSL perl-XML-Parser perl-TimeDate httpd mod_perl gd gd-devel cronie procmail}.each do |pkg|
+%w{cronie
+    gd
+    gd-devel
+    httpd
+    mod_perl
+    mysql-server
+    perl
+    perl-core
+    perl-Crypt-Eksblowfish
+    perl-Crypt-SSLeay
+    perl-Encode-HanExtra
+    perl-GD
+    perl-GDGraph
+    perl-GDTextUtil
+    perl-JSON-XS
+    perl-LDAP
+    perl-Mail-IMAPClient
+    perl-DBD-MySQL
+    perl-IO-Socket-SSL
+    perl-LDAP
+    perl-libwww-perl
+    perl-Net-DNS
+    perl-PDF-API2
+    perl-Text-CSV_XS
+    perl-TimeDate
+    perl-XML-Parser
+    perl-YAML-LibYAML
+    procmail
+  }.each do |pkg|
   package pkg do                                                                
     action :install                                                             
   end                                                                           
