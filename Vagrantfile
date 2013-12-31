@@ -6,7 +6,7 @@ Vagrant.configure("2") do |config|
   # options are documented and commented below. For a complete reference,
   # please see the online documentation at vagrantup.com.
 
-  config.vm.hostname = "chef-otrs-berkshelf"
+  config.vm.hostname = "chef-otrs-berkshelf.local"
 
   # Every Vagrant virtual environment requires a box to build off of.
   #config.vm.box = "Berkshelf-CentOS-6.3-x86_64-minimal"
@@ -42,13 +42,13 @@ Vagrant.configure("2") do |config|
   # backing providers for Vagrant. These expose provider-specific options.
   # Example for VirtualBox:
   #
-  # config.vm.provider :virtualbox do |vb|
+  config.vm.provider :virtualbox do |vb|
   #   # Don't boot with headless mode
   #   vb.gui = true
   #
   #   # Use VBoxManage to customize the VM. For example to change memory:
-  #   vb.customize ["modifyvm", :id, "--memory", "1024"]
-  # end
+    vb.customize ["modifyvm", :id, "--memory", "1024", "--cpus", "2"]
+  end
   #
   # View the documentation for the provider you're using for more
   # information on available options.
@@ -80,7 +80,8 @@ Vagrant.configure("2") do |config|
 
     chef.json = {
       :mysql => {
-        :server_root_password => 'rootpass',
+        #:server_root_password => 'rootpass',
+        :server_root_password => '',
         :server_debian_password => 'debpass',
         :server_repl_password => 'replpass'
       }
@@ -88,7 +89,9 @@ Vagrant.configure("2") do |config|
 
     chef.run_list = [
         "recipe[selinux::disabled]",
+        "recipe[iptables::disabled]",
         "recipe[yum::epel]",                                                    
+        "recipe[database::mysql]",
         "recipe[chef-otrs::default]"
     ]
   end
