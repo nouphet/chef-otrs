@@ -3,27 +3,27 @@
 # Recipe:: default
 #
 # Copyright (C) 2013 YOUR_NAME
-# 
+#
 # All rights reserved - Do Not Redistribute
 #
 
-node.set[:timezone][:use_symlink] = false                                       
-node.set[:tz] = 'Asia/Tokyo'                                                    
+node.set[:timezone][:use_symlink] = false
+node.set[:tz] = 'Asia/Tokyo'
 
-include_recipe 'timezone-ii'                                                    
+include_recipe 'timezone-ii'
 include_recipe 'yum::epel'
-include_recipe "yum"                                                            
+include_recipe "yum"
 include_recipe 'database::mysql'
-#include_recipe "iptables"                                                            
+#include_recipe "iptables"
 
 #iptables_rule "ssh"
 #iptables_rule "http"
 
 %w{vim tcpdump wget gcc-c++ libffi-devel libyaml-devel make git}.each do |pkg|
-  package pkg do                                                                
-    action :install                                                             
-  end                                                                           
-end                                                                             
+  package pkg do
+    action :install
+  end
+end
 
 %w{cronie
     gd
@@ -54,10 +54,10 @@ end
     perl-YAML-LibYAML
     procmail
   }.each do |pkg|
-  package pkg do                                                                
-    action :install                                                             
-  end                                                                           
-end                                                                             
+  package pkg do
+    action :install
+  end
+end
 
 service "httpd" do
       supports :status => true, :restart => true, :reload => true
@@ -89,10 +89,10 @@ mysql_database_user "otrs" do
 end
 
 # Install OTRS Package
-remote_file "/usr/local/src/otrs-3.3.3-01.noarch.rpm" do                          
+remote_file "/usr/local/src/otrs-3.3.3-01.noarch.rpm" do
   source "http://ftp.otrs.org/pub/otrs/RPMS/rhel/6/otrs-3.3.3-01.noarch.rpm"
-  #not_if "test -f /usr/local/src/otrs-3.3.3-01.noarch.rpm"                 
-end                                                                             
+  #not_if "test -f /usr/local/src/otrs-3.3.3-01.noarch.rpm"
+end
 
 package "OTRS-Package" do
   action :install
@@ -104,4 +104,25 @@ end
 #      supports :status => true, :restart => true, :reload => true
 #      action [ :enable, :restart ]
 #end
+
+log "########################################"
+log "# Finished.                            #"
+log "########################################"
+
+log "Next steps:
+
+[httpd services]
+ Restart httpd 'service httpd restart'
+
+ [install the OTRS database]
+  Make sure your database server is running.
+   Use a web browser and open this link:
+    http://your.domain/otrs/installer.pl
+
+    [OTRS services]
+     Start OTRS 'service otrs start' (service otrs {start|stop|status|restart).
+
+     ((enjoy))
+
+      Your OTRS Team"
 
