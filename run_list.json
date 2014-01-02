@@ -1,0 +1,16 @@
+{
+    "mysql": {
+    "server_root_password": "",
+    "server_debian_password": "root",
+    "server_repl_password": "root",
+    "bind_address": "0.0.0.0"
+  },
+    "run_list": [
+        "recipe[selinux::disabled]",
+        "recipe[iptables::disabled]",
+        "recipe[yum::epel]",
+        "recipe[database::mysql]",
+        "recipe[chef-otrs::default]"
+    ]
+}
+
