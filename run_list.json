@@ -10,6 +10,7 @@
         "recipe[iptables::disabled]",
         "recipe[yum::epel]",
         "recipe[database::mysql]",
+        "recipe[mysql::server]",
         "recipe[chef-otrs::default]"
     ]
 }

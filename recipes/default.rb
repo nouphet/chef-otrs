@@ -11,8 +11,8 @@ node.set[:timezone][:use_symlink] = false
 node.set[:tz] = 'Asia/Tokyo'
 
 include_recipe 'timezone-ii'
-include_recipe 'yum::epel'
 include_recipe "yum"
+include_recipe 'yum::epel'
 include_recipe 'database::mysql'
 #include_recipe "iptables"
 
