@@ -92,15 +92,16 @@ mysql_database_user "otrs" do
 end
 
 # Install OTRS Package
-remote_file "/usr/local/src/otrs-3.3.3-01.noarch.rpm" do
-  source "http://ftp.otrs.org/pub/otrs/RPMS/rhel/6/otrs-3.3.3-01.noarch.rpm"
+remote_file "/usr/local/src/otrs-3.3.5-02.noarch.rpm" do
+  source "http://ftp.otrs.org/pub/otrs/RPMS/rhel/6/otrs-3.3.5-02.noarch.rpm"
+  #source "http://ftp.otrs.org/pub/otrs/RPMS/rhel/6/otrs-3.3.3-01.noarch.rpm"
   #not_if "test -f /usr/local/src/otrs-3.3.3-01.noarch.rpm"
 end
 
 package "OTRS-Package" do
   action :install
   provider Chef::Provider::Package::Rpm
-  source "/usr/local/src/otrs-3.3.3-01.noarch.rpm"
+  source "/usr/local/src/otrs-3.3.5-02.noarch.rpm"
 end
 
 #service "otrs" do
